@@ -21,7 +21,7 @@ function euroUnformatter(text) {
 function scrape(language, product_url) {
     return new Promise(function (resolve, reject) {
         xray('https://www.amazon.' + language + product_url, {
-            price: '#priceblock_ourprice',
+            price: '.offer-price',
             product_name: '#productTitle'
         })(function(err, data) {
             if (err) reject(err);
