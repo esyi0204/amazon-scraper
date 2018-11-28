@@ -21,7 +21,7 @@ function euroUnformatter(text) {
 function scrape(language, product_url) {
     return new Promise(function (resolve, reject) {
         xray('https://www.amazon.' + language + product_url, {
-            price: '.offer-price, #price_inside_buybox, #priceblock_dealprice, #price_inside_buybox',
+            price: '.offer-price, #price_inside_buybox, #priceblock_dealprice, #price_inside_buybox, #priceblock_ourprice',
             product_name: '#productTitle'
         })(function(err, data) {
             if (err) reject(err);
@@ -55,7 +55,7 @@ function sortByPrice(a, b) {
 function printTable(data) {
     data.sort(sortByPrice);
     var table = new Table({
-        head: ['Date', 'Site', 'Product name', 'Original price', 'Price (EUR)'],
+        head: ['Date', 'Site', 'Product name', 'Amazon price', 'Price'],
         colWidths: [20, 10, 20, 20 ,20]
     });
     data.forEach(function(product) {
